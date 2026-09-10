@@ -1,27 +1,58 @@
 {
   "cli_args": {
     "fallback_reveal_fraction": 0.4,
-    "games_per_size": 2,
+    "games_per_size": 30,
     "generated_at": null,
     "mine_count": null,
     "mine_density": 0.16,
     "out": "instances/",
     "seed": 42,
     "sizes": [
-      10
+      10,
+      20,
+      30,
+      40,
+      50,
+      60
     ]
   },
   "files": {
     "10x10.jsonl": {
-      "bytes": 4256,
-      "instances": 4,
-      "sha256": "5d38d0e0b41596f99083c2bc99257052526b9cafeb24f9e99515a8cf58f1293c"
+      "bytes": 62789,
+      "instances": 60,
+      "sha256": "963569d0510ce5dbe4d14e75d3c484eb8162fc5bb1dd957ba2a05ba98673c98a"
+    },
+    "20x20.jsonl": {
+      "bytes": 212053,
+      "instances": 60,
+      "sha256": "4f0a6e1d18bbf01632c56fbdf6f649d70a80a8b88b04900db76a92cac7c9370c"
+    },
+    "30x30.jsonl": {
+      "bytes": 471133,
+      "instances": 60,
+      "sha256": "5dea500a91a15a885d9c59179e7bb9e61b258732559be97fbf1655d78286c339"
+    },
+    "40x40.jsonl": {
+      "bytes": 829419,
+      "instances": 60,
+      "sha256": "92bfd598a1c84ac1c6a48ee85dfe9540fce6920a47e8f9e9df8fbfcdeda28188"
+    },
+    "50x50.jsonl": {
+      "bytes": 1323808,
+      "instances": 60,
+      "sha256": "bcd7f5015743babd7d11ca46058dc7b08a4559f3d9c447769728530db5a1e742"
+    },
+    "60x60.jsonl": {
+      "bytes": 1910132,
+      "instances": 60,
+      "sha256": "1eca9946ba5b92eb96b9886357ae7f060bae8988974fb9e2fd35f4efe0456163"
     }
   },
-  "generated_at": "2026-09-10T14:49:28.683074+00:00",
-  "git_commit": "2817d2aaede372b0b15c4b76379797d4da5be765",
+  "generated_at": "2026-09-10T15:00:03.126694+00:00",
+  "git_commit": "cc1a5af969fc13bffc0a9b99139328dc4c56bb4e",
   "package_versions": [
-    "-e git+ssh://git@github.com/AkmalIT/Research-paper.git@2817d2aaede372b0b15c4b76379797d4da5be765#egg=mcp_bench&subdirectory=minesweeper-np-complete",
+    "# Editable Git install with no remote (mcp-bench==0.1.0)",
+    "-e /home/akmal/Desktop/research-paper/minesweeper-np-complete",
     "Pygments==2.21.0",
     "attrs==26.1.0",
     "bidict==0.22.1",

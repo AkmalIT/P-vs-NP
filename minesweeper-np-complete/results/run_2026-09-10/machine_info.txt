@@ -1,0 +1,18 @@
+Run directory: results/run_2026-09-10
+platform.platform(): Linux-6.19.13-arch1-1-x86_64-with-glibc2.43
+platform.processor(): 
+CPU model: 12th Gen Intel(R) Core(TM) i5-1235U
+os.cpu_count(): 12
+psutil.virtual_memory().total bytes: 7978196992
+
+free -h:
+total        used        free      shared  buff/cache   available
+Mem:           7.4Gi       5.3Gi       829Mi       883Mi       2.6Gi       2.1Gi
+Swap:          3.7Gi       1.2Gi       2.5Gi
+
+Python version: 3.14.4 (main, Apr  8 2026, 17:48:49) [GCC 15.2.1 20260209]
+python --version: Python 3.14.4
+pip freeze file: results/run_2026-09-10/pip-freeze.txt
+Current git commit: cc1a5af969fc13bffc0a9b99139328dc4c56bb4e
+git status --porcelain before creating benchmark artifacts: <clean>
+git status --porcelain after creating this run directory, before generation/solving: ?? minesweeper-np-complete/results/run_2026-09-10/
