@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-bench"
+version = "0.1.0"
+description = "Reproducible SAT benchmark for the Minesweeper Consistency Problem"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "MCP benchmark authors"}]
+dependencies = [
+  "python-sat[pblib,aiger]==1.9.dev15",
+  "matplotlib==3.10.6",
+  "psutil==7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.4.2",
+  "pytest-cov==7.0.0",
+  "mypy==1.17.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["mcp_bench"]
+strict = true
+warn_unused_ignores = false
+no_site_packages = true
+
+[[tool.mypy.overrides]]
+module = ["matplotlib.*", "numpy.*", "psutil", "pysat.*"]
+ignore_missing_imports = true
+follow_imports = "skip"

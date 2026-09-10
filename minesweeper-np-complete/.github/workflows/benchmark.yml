@@ -1,0 +1,74 @@
+name: benchmark
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Test
+        run: pytest -v --cov=mcp_bench
+      - name: Type check
+        run: mypy src
+
+  benchmark-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      - name: Generate smoke instances
+        run: python -m mcp_bench.generate_instances --sizes 10,20 --games-per-size 5 --seed 42 --out instances/
+      - name: Run smoke benchmark
+        run: python -m mcp_bench.run_benchmark --instances instances/ --out results/run_smoke/ --timeout 60
+      - name: Report smoke benchmark
+        run: python -m mcp_bench.report --run results/run_smoke/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-smoke-results
+          path: results/
+
+  benchmark-full:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      # GitHub-hosted runners have limited shared CPU. These results are useful
+      # for optional verification but are not the canonical paper numbers.
+      # Hitting the job timeout is an informative data point; per-instance solver
+      # timeouts are recorded as TIMEOUT in raw.jsonl.
+      - name: Generate full instances
+        run: python -m mcp_bench.generate_instances --sizes 10,20,30,40,50,60 --games-per-size 30 --seed 42 --out instances/
+      - name: Run full benchmark
+        run: python -m mcp_bench.run_benchmark --instances instances/ --out results/run_full_ci/ --timeout 600
+      - name: Report full benchmark
+        run: python -m mcp_bench.report --run results/run_full_ci/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-full-results
+          path: results/
+
